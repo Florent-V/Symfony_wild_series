@@ -5,12 +5,6 @@
 
 {% block body %}
 
-<pre>
-    {{ dump(program) }}
-    {{ dump(season) }}
-    {{ dump(episode) }}
-</pre>
-
 	<div class="media">
         <h1>{{program.title}} - Saison {{season.number}}</h1>
 		<img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
