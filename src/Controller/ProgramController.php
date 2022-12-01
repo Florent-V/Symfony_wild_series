@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/program', name: 'program_')]
 class ProgramController extends AbstractController
 {
-    #[Route('/', name: 'index')]
+    #[Route('/', name: 'index', methods: ['GET'])]
     public function index(ProgramRepository $programRepository) //: Response
     {
         $programs = $programRepository->findAll();
