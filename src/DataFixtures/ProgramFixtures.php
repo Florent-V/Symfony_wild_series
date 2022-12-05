@@ -47,8 +47,6 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         ],
     ];
 
-    public const SYNOPSIS = [];
-
     public function load(ObjectManager $manager)
     {
         $i = 1;

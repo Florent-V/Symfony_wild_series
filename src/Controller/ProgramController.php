@@ -41,7 +41,7 @@ class ProgramController extends AbstractController
         $form->handleRequest($request);
 
         // Was the form submitted ?
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted()  && $form->isValid()) {
             // Deal with the submitted data
             // For example : persiste & flush the entity
             // And redirect to a route that display the result
@@ -55,7 +55,8 @@ class ProgramController extends AbstractController
 
         // Render the form (best practice)
         return $this->renderForm('category/new.html.twig', [
-            'form' => $form,
+            'program' => $program,
+            'form' => $form
         ]);
     }
 

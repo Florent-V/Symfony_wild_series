@@ -1,0 +1,1 @@
+alert('c\'est ok');
