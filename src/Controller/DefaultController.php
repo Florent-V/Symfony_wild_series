@@ -14,8 +14,6 @@ Class DefaultController extends AbstractController
     {
         $categories = $categoryRepository->findAll();
 
-        return $this->render('index.html.twig', [
-           'categories' => $categories,
-        ]);
+        return $this->render('index.html.twig');
     }
 }

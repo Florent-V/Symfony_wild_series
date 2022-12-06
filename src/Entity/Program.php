@@ -52,6 +52,18 @@ class Program
     #[ORM\OneToMany(mappedBy: 'program', targetEntity: Season::class, orphanRemoval: true)]
     private Collection $seasons;
 
+    #[ORM\Column(length: 255)]
+    #[Assert\EnableAutoMapping]
+    #[Assert\Country(
+        alpha3: true
+    )]
+    private ?string $country = null;
+
+    #[ORM\Column]
+    #[Assert\EnableAutoMapping]
+    #[Assert\GreaterThan(1895)]
+    private ?int $year = null;
+
     public function __construct()
     {
         $this->seasons = new ArrayCollection();
@@ -136,6 +148,30 @@ class Program
                 $season->setProgram(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getYear(): ?int
+    {
+        return $this->year;
+    }
+
+    public function setYear(int $year): self
+    {
+        $this->year = $year;
 
         return $this;
     }

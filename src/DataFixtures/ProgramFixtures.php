@@ -1,7 +1,7 @@
 <?php
 
 namespace App\DataFixtures;
-
+use Faker\Factory;
 use App\Entity\Program;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -49,17 +49,19 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
+        $faker = Factory::create();
         $i = 1;
         foreach (self::TV_SHOWS as $tvShow) {
             $program = new Program();
             $program->setTitle($tvShow['title']);
             $program->setSynopsis($tvShow['synopsis']);
+            $program->setCountry($faker->countryISOAlpha3());
+            $program->setYear($faker->year());
             $program->setCategory($this->getReference('category_' . CategoryFixtures::CATEGORIES[rand(0, count(CategoryFixtures::CATEGORIES) - 1)]));
             $manager->persist($program);
             $this->addReference('program_' . $i, $program);
             $i++;
         }
-
         $manager->flush();
     }
 
