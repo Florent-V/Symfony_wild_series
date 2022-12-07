@@ -3,8 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Episode;
+use App\Entity\Season;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,7 +19,18 @@ class EpisodeType extends AbstractType
             ->add('title')
             ->add('number')
             ->add('synopsis')
-            ->add('season', null, ['choice_label' => 'number'])
+            ->add('season', EntityType::class, [
+                'class' => Season::class,
+                'choice_label' => function(Season $season) {
+                    return
+                        $season->getProgram()->getCategory()->getName() . " | " .
+                        $season->getProgram()->getTitle() .
+                        ' : saison ' . $season->getNumber();
+                },
+                'group_by' => function(Season $season) {
+                    return $season->getProgram()->getCategory()->getName();
+                }
+                ])
         ;
     }
 

@@ -6,28 +6,18 @@
 {% block body %}
 
 	<div class="media">
-        <h1>{{program.title}} - Saison {{season.number}}</h1>
-		<img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
-        <p>Catégorie : {{ program.category.name }}</p>
+        <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
+        <div class="media-body">
+            <h1>{{program.title}} - Saison {{season.number}}</h1>
+            <p>Catégorie : {{ program.category.name }}</p>
+            <h2>Episode N°{{ episode.number }}</h2>
+            <p>Description {{episode.synopsis}}</p>
+            <a href="{{ path('program_show', { id: program.id} ) }}">Retour à la page détaillée de la série</a>
+        </div>	
+    </div>
 
-		<div class="media-body">
-        <h2>Episode N°{{ episode.number }}</h2>
-
-                <p>Description {{episode.synopsis}}</p>
-                <a href="{{ path('program_show', { id: program.id} ) }}">
-                    Retour à la page détaillée de la série
-                </a>
-                <br>
-
-          
-
-            <a href="{{ path('program_index') }}">
-                Retour à la liste des programmes
-            </a>
-	    </div>	
-	</div>
-
-		
-
+    <a href="{{ path('program_index') }}">
+        Retour à la liste des programmes
+    </a>
 
 {% endblock %}

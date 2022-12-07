@@ -6,29 +6,36 @@
 {% block body %}
 
 	<div class="media">
-		<p>{{program.seasons|length}}</p>
 		<img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
 		<div class="media-body">
 			<h1 class="mt-0">{{ program.title }}</h1>
 			<p>{{ program.synopsis }}</p>
-			<p>Catégorie :
-				{{ program.category.name }}</p>
+			<p>Catégorie : {{ program.category.name }}</p> 
+			<p>Nombre de saison : {{program.seasons|length}}</p>
 		</div>
-
-		{% for season in program.seasons|sort((a, b) => a.number <=> b.number) %}
-			<p>{{season.number}}</p>
-			<p>{{season.year}}</p>
-			<p>{{season.description}}</p>
-            <a href="{{ path("program_season_show", { program: program.id, season: season.id }) }}">
-			    Aller à la page détaillée de la saison
-		    </a>
-
-		{% endfor %}
-
-		<a href="{{ path('program_index') }}">
-			Retour à la liste des programmes
-		</a>
 	</div>
+
+	<div class="container-fluid">
+		<div class="row justify-content-center program">
+			{% for season in program.seasons|sort((a, b) => a.number <=> b.number) %}
+				<div class="card col-11 col-sm-5 col-lg-3 col-xxl-2 p-0 m-2">
+					<div class="card-body">
+						<h3 class="card-title">Saison N°{{season.number}}</h3>
+						<h4 class="card-subtitle mb-2 text-muted">Année : {{season.year}}</h4>
+						<h4 class="card-subtitle mb-2 text-muted">Nombre d'épisodes : {{season.episodes|length}}</h4>
+						<p class="card-text">{{season.description}}</p>
+						<a href="{{ path("program_season_show", { program: program.id, season: season.id }) }}" class="btn btn-primary m-t-auto">Aller à la page détaillée de la saison</a>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+
+
+	<a href="{{ path('program_index') }}">
+		Retour à la liste des programmes
+	</a>
+
 
 
 {% endblock %}

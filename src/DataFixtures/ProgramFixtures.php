@@ -9,6 +9,8 @@ use Doctrine\Persistence\ObjectManager;
 
 class ProgramFixtures extends Fixture implements DependentFixtureInterface
 {
+    public static int $programIndex = 0;
+
     public const TV_SHOWS = [
         [
             'title' => 'The Walking Dead',
@@ -45,13 +47,34 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             'synopsis' => "Des super-héros tournent mal et une équipe décide de passer à l'action et d'y mettre fin",
             'poster' => null
         ],
+        [
+            'title' => 'Wednesday',
+            'synopsis' => "A présent étudiante à la singulière Nevermore Academy, Wednesday Addams tente de s'adapter auprès des autres élèves tout en enquêtant à la suite d'une série de meurtres qui terrorise la ville...",
+            'poster' => null
+        ],
+        [
+            'title' => 'Dahmer',
+            'synopsis' => "Sur plus d'une décennie, Jeffrey Dahmer a massacré 17 adolescents et jeunes hommes avant son inculpation. Comment a-t-il pu échapper aux forces de l'ordre pendant si longtemps ?",
+            'poster' => null
+        ],
+        [
+            'title' => 'La casa de papel',
+            'synopsis' => "El Profesor est le cerveau d'un groupe de huit criminels dont l'ambition est de réaliser le braquage parfait : pourquoi attaquer une bijouterie ou une banque, quand on peut s’infiltrer dans l’antre des antres, l’usine de la Monnaie et des Timbres, et fabriquer son propre argent. ",
+            'poster' => null
+        ],
+        [
+            'title' => 'Stranger Things',
+            'synopsis' => "Un soir de novembre 1983 dans la ville américaine d'Hawkins en Indiana, le jeune Will Byers âgé de douze ans disparaît brusquement sans laisser de traces, hormis son vélo. Plusieurs personnages vont alors tenter de le retrouver.",
+            'poster' => null
+        ],
     ];
 
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create();
-        $i = 1;
+        
         foreach (self::TV_SHOWS as $tvShow) {
+            self::$programIndex++;
             $program = new Program();
             $program->setTitle($tvShow['title']);
             $program->setSynopsis($tvShow['synopsis']);
@@ -59,8 +82,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             $program->setYear($faker->year());
             $program->setCategory($this->getReference('category_' . CategoryFixtures::CATEGORIES[rand(0, count(CategoryFixtures::CATEGORIES) - 1)]));
             $manager->persist($program);
-            $this->addReference('program_' . $i, $program);
-            $i++;
+            $this->addReference('program_' . self::$programIndex, $program);
+            
         }
         $manager->flush();
     }

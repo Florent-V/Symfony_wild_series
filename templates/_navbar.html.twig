@@ -20,7 +20,7 @@
             Catégories
           </a>
           <ul class="dropdown-menu">
-            {% for category in categories.getCategories %}
+            {% for category in globalcategories.getCategories %}
               <li><a class="dropdown-item" href="#">{{category.name}}</a></li>
             {% endfor %}
             <li><hr class="dropdown-divider"></li>

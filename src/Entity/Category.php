@@ -7,7 +7,15 @@ use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
+#[UniqueEntity(
+    fields: ['name'],
+    errorPath: 'name',
+    message: 'This name is already in Database',
+)]
 class Category
 {
     public function __construct()
@@ -21,6 +29,8 @@ class Category
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\EnableAutoMapping]
+    #[Assert\NotBlank]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Program::class)]

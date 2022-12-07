@@ -3,15 +3,22 @@
 {% block title %}Wild Series - All Categories{% endblock %}
 
 {% block body %}
-<h1>Toutes les Catégories de Séries :</h1>
-{% for category in categories %}
-<div>
-<h2>{{ loop.index }}/ {{ category.name }}</h2>
-<a href="{{ path("category_show", { categoryName: category.name }) }}">Voir la liste des séries de cette catégorie</a>
+    <h1>Toutes les Catégories de Séries :</h1>
 
-</div>
-    
-{% endfor %}
-
+    <div class="container-fluid">
+        <div class="row justify-content-center program">
+            {% for category in categories %}
+                    <div class="card col-11 col-sm-5 col-lg-3 col-xxl-2 p-0 m-2">
+                        <img src="https://picsum.photos/id/142/800/1200" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h3 class="card-title" style="text-align:center">{{ category.name }}</h3>
+                            <a href="{{ path("category_show", { categoryName: category.name }) }}" class="btn btn-primary m-t-auto">Voir la liste des séries</a>
+                        </div>
+                    </div>
+            {% else %}
+                Aucune série trouvée.
+            {% endfor %}
+        </div>
+    </div>
 
 {% endblock %}

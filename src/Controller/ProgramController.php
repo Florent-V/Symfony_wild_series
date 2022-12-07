@@ -17,7 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProgramController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET'])]
-    public function index(ProgramRepository $programRepository) //: Response
+    public function index(ProgramRepository $programRepository): Response
     {
         $programs = $programRepository->findAll();
 
@@ -29,7 +29,7 @@ class ProgramController extends AbstractController
         );
     }
 
-    #[Route('/new', methods: ['GET', 'POST'], name: 'new')]
+    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
     public function new(Request $request, ProgramRepository $programRepository): Response
     {
         $program = new Program();
@@ -48,8 +48,6 @@ class ProgramController extends AbstractController
             $programRepository->save($program, true);
             //Redirect to categories list
             return $this->redirectToRoute('program_index');
-    
-    
             }
 
 
@@ -60,7 +58,7 @@ class ProgramController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', requirements: ['id' => '\d+'], methods: ['GET'], name: 'show')]
+    #[Route('/{id}', name: 'show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(Program $program): Response
     {
        
@@ -76,12 +74,12 @@ class ProgramController extends AbstractController
 
     #[Route(
         '/{program}/seasons/{season}',
+        name: 'season_show',
         requirements: [
             'program' => '\d+',
             'season' => '\d+'
         ],
-        methods: ['GET'],
-        name: 'season_show'
+        methods: ['GET']
     )]
     public function showSeason(Program $program, Season $season)
     {
