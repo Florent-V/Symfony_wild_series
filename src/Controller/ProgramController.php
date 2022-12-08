@@ -46,6 +46,8 @@ class ProgramController extends AbstractController
             // For example : persiste & flush the entity
             // And redirect to a route that display the result
             $programRepository->save($program, true);
+            // Once the form is submitted, valid and the data inserted in database, creation success flash message
+            $this->addFlash('success', 'The new program has been created');
             //Redirect to categories list
             return $this->redirectToRoute('program_index');
             }
@@ -116,13 +118,13 @@ class ProgramController extends AbstractController
 
     #[Route(
         '/{program}/seasons/{season}/episode/{episode}',
+        name: 'episode_show',
         requirements: [
             'program' => '\d+',
             'season' => '\d+',
             'episode' => '\d+',
         ],
-        methods: ['GET'],
-        name: 'episode_show'
+        methods: ['GET']
     )]
     public function showEpisode(Program $program, Season $season, Episode $episode)
     {

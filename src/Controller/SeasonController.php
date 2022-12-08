@@ -30,6 +30,9 @@ class SeasonController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $seasonRepository->save($season, true);
+            // Once the form is submitted, valid and the data inserted in database, creation success flash message
+            $this->addFlash('success', 'The new season has been created');
+
 
             return $this->redirectToRoute('app_season_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -71,6 +74,8 @@ class SeasonController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$season->getId(), $request->request->get('_token'))) {
             $seasonRepository->remove($season, true);
+            // creation warning flash message
+            $this->addFlash('danger', 'The season and his episodes has been deleted');
         }
 
         return $this->redirectToRoute('app_season_index', [], Response::HTTP_SEE_OTHER);
