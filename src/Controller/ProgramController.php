@@ -83,7 +83,7 @@ class ProgramController extends AbstractController
         ],
         methods: ['GET']
     )]
-    public function showSeason(Program $program, Season $season)
+    public function showSeason(Program $program, Season $season): Response
     {
         // $program = $programRepository->findOneBy(
         //     ['id' => $programId],
@@ -126,7 +126,7 @@ class ProgramController extends AbstractController
         ],
         methods: ['GET']
     )]
-    public function showEpisode(Program $program, Season $season, Episode $episode)
+    public function showEpisode(Program $program, Season $season, Episode $episode): Response
     {
 
         return $this->render('program/episode_show.html.twig', [
