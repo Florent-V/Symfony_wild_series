@@ -12,7 +12,7 @@
             <p>Catégorie : {{ program.category.name }}</p>
             <h2>Episode N°{{ episode.number }}</h2>
             <p>Description {{episode.synopsis}}</p>
-            <a href="{{ path('program_show', { id: program.id} ) }}">Retour à la page détaillée de la série</a>
+            <a href="{{ path("program_show", { slug: program.slug }) }}" class="btn btn-primary m-t-auto">Voir la fiche</a>
         </div>	
     </div>
 

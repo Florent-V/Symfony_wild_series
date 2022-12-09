@@ -10,8 +10,9 @@
 		<div class="media-body">
 			<h1 class="mt-0">{{ program.title }}</h1>
 			<p>{{ program.synopsis }}</p>
-			<p>Catégorie : {{ program.category.name }}</p> 
+			<p>Catégorie : {{ program.category.name }}</p>
 			<p>Nombre de saison : {{program.seasons|length}}</p>
+			<p>Durée : {{ programDuration }}</p>
 		</div>
 		<strong>Acteurs :</strong>
 		<ul>

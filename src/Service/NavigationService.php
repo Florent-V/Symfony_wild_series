@@ -6,13 +6,11 @@ use App\Repository\CategoryRepository;
 
 class NavigationService
 {
-    public function __construct(private CategoryRepository $categoryRepository)
+    public function __construct(private readonly CategoryRepository $categoryRepository)
     {
-        
-
     }
 
-    public function getCategories()
+    public function getCategories(): array
     {
         return $this->categoryRepository->findAll();
     }

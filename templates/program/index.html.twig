@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block body %}
+
 	<h1>Toutes les séries TV !</h1>
 	<div class="container-fluid">
 		<div class="row justify-content-center program">
@@ -16,7 +17,7 @@
 							<h5>Catégorie :	{{ program.category.name }}</h5>
 							<p class="card-text">Pays : {{program.country}} - Année : {{program.year}}</p>
 							<p class="card-text">{{ program.synopsis }}</p>
-							<a href="{{ path("program_show", { id: program.id }) }}" class="btn btn-primary m-t-auto">Voir la fiche</a>
+							<a href="{{ path("program_show", { slug: program.slug }) }}" class="btn btn-primary m-t-auto">Voir la fiche</a>
 						</div>
 					</div>
 			{% else %}
