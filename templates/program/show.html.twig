@@ -13,7 +13,16 @@
 			<p>Catégorie : {{ program.category.name }}</p> 
 			<p>Nombre de saison : {{program.seasons|length}}</p>
 		</div>
+		<strong>Acteurs :</strong>
+		<ul>
+			{% for actor in program.actors %}
+				<li>{{ actor.lastname }} {{ actor.firstname }}. <a href="{{ path("actor_show", { id: actor.id}) }}">Vu aussi dans</a></li>
+			{% else %}
+				<li>Aucun acteur pour cette série</li>
+			{% endfor %}
+		</ul>
 	</div>
+
 
 	<div class="container-fluid">
 		<div class="row justify-content-center program">

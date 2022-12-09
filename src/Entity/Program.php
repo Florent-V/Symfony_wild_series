@@ -13,8 +13,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[ORM\Entity(repositoryClass: ProgramRepository::class)]
 #[UniqueEntity(
     fields: ['title'],
-    errorPath: 'title',
     message: 'This title is already in Database',
+    errorPath: 'title',
 )]
 class Program
 {
@@ -32,8 +32,8 @@ class Program
     #[Assert\NotBlank]
     #[Assert\Regex(
         pattern: '/plus belle la vie/',
-        match: false,
         message: 'Are you serious ?',
+        match: false,
     )]
     private ?string $synopsis = null;
 
@@ -45,7 +45,7 @@ class Program
     )]
     private ?string $poster = null;
 
-    #[ORM\ManyToOne(inversedBy: 'programs', targetEntity: Category::class)]
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'programs')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
 
@@ -64,9 +64,13 @@ class Program
     #[Assert\GreaterThan(1895)]
     private ?int $year = null;
 
+    #[ORM\ManyToMany(targetEntity: Actor::class, mappedBy: 'programs')]
+    private Collection $actors;
+
     public function __construct()
     {
         $this->seasons = new ArrayCollection();
+        $this->actors = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -172,6 +176,33 @@ class Program
     public function setYear(int $year): self
     {
         $this->year = $year;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Actor>
+     */
+    public function getActors(): Collection
+    {
+        return $this->actors;
+    }
+
+    public function addActor(Actor $actor): self
+    {
+        if (!$this->actors->contains($actor)) {
+            $this->actors->add($actor);
+            $actor->addProgram($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActor(Actor $actor): self
+    {
+        if ($this->actors->removeElement($actor)) {
+            $actor->removeProgram($this);
+        }
 
         return $this;
     }

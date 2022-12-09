@@ -72,7 +72,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create();
-        
+
         foreach (self::TV_SHOWS as $tvShow) {
             self::$programIndex++;
             $program = new Program();
