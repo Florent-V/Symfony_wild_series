@@ -1,24 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Wild Series - All Actors{% endblock %}
+{% block title %}Actor index{% endblock %}
 
 {% block body %}
-    <h1>Toutes les acteurs de la base :</h1>
+    <h1>Actor index</h1>
 
-    <div class="container-fluid">
-        <div class="row justify-content-center program">
-            {% for actor in actors %}
-                <div class="card col-11 col-sm-5 col-lg-3 col-xxl-2 p-0 m-2">
-                    <img src="https://picsum.photos/id/142/800/1200" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h3 class="card-title" style="text-align:center">{{ actor.firstname }} {{ actor.lastname }}</h3>
-                        <a href="{{ path("actor_show", { id: actor.id })}}" class="btn btn-primary m-t-auto">Voir la liste des séries</a>
-                    </div>
-                </div>
-            {% else %}
-                Aucun acteur trouvé.
-            {% endfor %}
-        </div>
-    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>BirthDate</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for actor in actors %}
+            <tr>
+                <td>{{ actor.id }}</td>
+                <td>{{ actor.firstname }}</td>
+                <td>{{ actor.lastname }}</td>
+                <td>{{ actor.birthDate ? actor.birthDate|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_actor_show', {'id': actor.id}) }}">show</a>
+                    <a href="{{ path('app_actor_edit', {'id': actor.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
+    <a href="{{ path('app_actor_new') }}">Create new</a>
 {% endblock %}

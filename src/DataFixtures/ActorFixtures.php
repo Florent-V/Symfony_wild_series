@@ -11,6 +11,10 @@ use Faker\Factory;
 class ActorFixtures extends Fixture implements DependentFixtureInterface
 {
     public static int $actorIndex=0;
+
+    /**
+     * @throws \Exception
+     */
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
@@ -20,7 +24,7 @@ class ActorFixtures extends Fixture implements DependentFixtureInterface
             $actor = new Actor();
             $actor->setFirstname($faker->firstName());
             $actor->setLastname($faker->lastName());
-            $actor->setBirthDate($faker->dateTime('-18 years'));
+            $actor->setBirthDate(new \DateTime($faker->date('Y-m-d','-18 years')));
             for ($j=0; $j<= $nbPrograms; $j++) {
                 $actor->addProgram($this->getReference('program_' . $faker->unique()->numberBetween(1, ProgramFixtures::$programIndex)));
             }

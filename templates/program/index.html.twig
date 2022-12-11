@@ -11,7 +11,7 @@
 		<div class="row justify-content-center program">
 			{% for program in programs %}
 					<div class="card col-11 col-sm-5 col-lg-3 col-xxl-2 p-0 m-2">
-						<img src="https://picsum.photos/id/142/800/1200" class="card-img-top" alt="...">
+						<img src="{{ vich_uploader_asset(program) }}" class="card-img-top" alt="{{ program.title }}">
 						<div class="card-body">
 							<h3 class="card-title">{{ program.title }}</h3>
 							<h5>Catégorie :	{{ program.category.name }}</h5>

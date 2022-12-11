@@ -1,43 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Fiche Acteur #{{ actor.id }}
-{% endblock %}
+{% block title %}Actor{% endblock %}
 
 {% block body %}
+    <h1>Fiche de {{ actor.firstname ~ ' '  ~ actor.lastname}} </h1>
 
-    <div class="media">
-        <img class="align-self-start mr-3" src="" alt="">
-        <div class="media-body">
-            <h1 class="mt-0">{{ actor.firstname }} {{ actor.lastname }}</h1>
-        </div>
-    </div>
+    <img style="max-width: 500px" src="{{ vich_uploader_asset(actor) }}" alt="{{ actor.firstname }}">
 
-    <div class="container-fluid">
-        <div class="row justify-content-center program">
-            <p>Au casting des séries suivantes({{ actor.programs|length }}) : </p>
-            {% for program in actor.programs %}
-                <div class="card col-11 col-sm-5 col-lg-3 col-xxl-2 p-0 m-2">
-                    <img src="https://picsum.photos/id/142/800/1200" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h3 class="card-title">{{ program.title }}</h3>
-                        <h5>Catégorie :	{{ program.category.name }}</h5>
-                        <p class="card-text">Pays : {{program.country}} - Année : {{program.year}}</p>
-                        <p class="card-text">{{ program.synopsis }}</p>
-                        {% set textLink = 'Voir la fiche série' %}
-                        {% include './program/_link_program_show.html.twig' %}
-                    </div>
-                </div>
-            {% else %}
-                Aucune série trouvée.
-            {% endfor %}
-        </div>
-    </div>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ actor.id }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ actor.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ actor.lastname }}</td>
+            </tr>
+            <tr>
+                <th>BirthDate</th>
+                <td>{{ actor.birthDate ? actor.birthDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
 
+    <a href="{{ path('app_actor_index') }}">back to list</a>
 
-    <a href="{{ path('program_index') }}">
-        Retour à la liste des programmes
-    </a>
+    <a href="{{ path('app_actor_edit', {'id': actor.id}) }}">edit</a>
 
-
-
+    {{ include('actor/_delete_form.html.twig') }}
 {% endblock %}

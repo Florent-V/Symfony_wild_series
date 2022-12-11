@@ -76,7 +76,7 @@ class ProgramController extends AbstractController
 
 
         // Render the form (best practice)
-        return $this->renderForm('category/new.html.twig', [
+        return $this->renderForm('program/new.html.twig', [
             'program' => $program,
             'form' => $form
         ]);
@@ -96,6 +96,38 @@ class ProgramController extends AbstractController
             'programDuration' => $programDuration->calculate($program),
         ]);
     }
+
+    #[Route('/{slug}/edit', name: 'edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Program $program, ProgramRepository $programRepository): Response
+    {
+        $form = $this->createForm(ProgramType::class, $program);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $programRepository->save($program, true);
+
+            return $this->redirectToRoute('program_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('program/edit.html.twig', [
+            'program' => $program,
+            'form' => $form,
+        ]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     #[Route(
         '/{program}/seasons/{season}',
@@ -159,5 +191,17 @@ class ProgramController extends AbstractController
         ]);
 
 
+    }
+
+    #[Route('/{slug}', name: 'delete', methods: ['POST'])]
+    public function delete(Request $request, Program $program, ProgramRepository $programRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $program->getId(), $request->request->get('_token'))) {
+            $programRepository->remove($program, true);
+            // creation warning flash message
+            $this->addFlash('danger', 'The program has been deleted');
+        }
+
+        return $this->redirectToRoute('program_index', [], Response::HTTP_SEE_OTHER);
     }
 }
