@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>
+        {% block title %}
+            New !
+        {% endblock %}
+    </title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+    <style>
+        body {
+            background-color: #0a53be;
+            color: #FFFFFF;
+        }
+    </style>
+</head>
+<body>
+
+    {% block body %}{% endblock %}
+
+
+    <script src="https://kit.fontawesome.com/f7ad567183.js" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
