@@ -23,7 +23,8 @@
                         <h5>Catégorie :	{{ program.category.name }}</h5>
                         <p class="card-text">Pays : {{program.country}} - Année : {{program.year}}</p>
                         <p class="card-text">{{ program.synopsis }}</p>
-                        <a href="{{ path("program_show", { slug: program.slug }) }}" class="btn btn-primary m-t-auto">Voir la fiche</a>
+                        {% set textLink = 'Voir la fiche série' %}
+                        {% include './program/_link_program_show.html.twig' %}
                     </div>
                 </div>
             {% else %}
