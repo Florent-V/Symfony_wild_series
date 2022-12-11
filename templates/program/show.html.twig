@@ -17,7 +17,7 @@
 		<strong>Acteurs :</strong>
 		<ul>
 			{% for actor in program.actors %}
-				<li>{{ actor.lastname }} {{ actor.firstname }}. <a href="{{ path("actor_show", { id: actor.id}) }}">Vu aussi dans</a></li>
+				<li>{{ actor.lastname }} {{ actor.firstname }}. <a href="{{ path("app_actor_show", { id: actor.id}) }}">Vu aussi dans</a></li>
 			{% else %}
 				<li>Aucun acteur pour cette série</li>
 			{% endfor %}
