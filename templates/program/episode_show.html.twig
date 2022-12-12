@@ -16,6 +16,22 @@
         </div>	
     </div>
 
+    {% if app.user %}
+        <div class="addComment">
+            <h3>Ajouter un commentaire à l'épisode :</h3>
+            {{ include('comment/_form.html.twig') }}
+        </div>
+    {% endif %}
+
+    <div class="viewComments">
+        {% for comment in allComments %}
+            <div class="comment">
+                <h4>De {{ comment.author.username }}</h4>
+                <p>{{ comment.comment }} <br>Ma note : {{ comment.rate }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
     <a href="{{ path('program_index') }}">
         Retour à la liste des programmes
     </a>

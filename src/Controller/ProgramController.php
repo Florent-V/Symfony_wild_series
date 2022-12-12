@@ -2,10 +2,13 @@
 // src/Controller/ProgramController.php
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Season;
 use App\Entity\Episode;
 use App\Entity\Program;
+use App\Form\CommentType;
 use App\Form\ProgramType;
+use App\Repository\CommentRepository;
 use App\Repository\SeasonRepository;
 use App\Repository\ProgramRepository;
 use App\Service\ProgramDuration;
@@ -115,20 +118,6 @@ class ProgramController extends AbstractController
         ]);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     #[Route(
         '/{program}/seasons/{season}',
         name: 'season_show',
@@ -140,35 +129,10 @@ class ProgramController extends AbstractController
     )]
     public function showSeason(Program $program, Season $season): Response
     {
-        // $program = $programRepository->findOneBy(
-        //     ['id' => $programId],
-        // );
-
-        // if (!$program) {
-        //     throw $this->createNotFoundException(
-        //         'No program with this id : found in program\'s table.'
-        //     );
-        // }
-
-        // $season = $seasonRepository->findOneBy(
-        //     [
-        //         'program' => $program,
-        //         'id' => $seasonId,
-        //     ]
-        // );
-
-        // if (!$season) {
-        //     throw $this->createNotFoundException(
-        //         'No season with this id : found in program\'s table.'
-        //     );
-        // }
-
         return $this->render('program/season_show.html.twig', [
             'season' => $season,
             'program' => $program,
         ]);
-
-
     }
 
     #[Route(
@@ -179,15 +143,46 @@ class ProgramController extends AbstractController
             'season' => '\d+',
             'episode' => '\d+',
         ],
-        methods: ['GET']
+        methods: ['GET', 'POST']
     )]
-    public function showEpisode(Program $program, Season $season, Episode $episode): Response
+    public function showEpisode(Request $request,
+                                CommentRepository $commentRepository,
+                                Program $program,
+                                Season  $season,
+                                Episode $episode): Response
     {
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
 
-        return $this->render('program/episode_show.html.twig', [
+        $user = $this->getUser();
+
+        $allCommentsEpisode = $commentRepository->findBy(
+            ['episode' => $episode],
+            ['id' => 'ASC']
+        );
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setAuthor($user);
+            $comment->setEpisode($episode);
+            $commentRepository->save($comment, true);
+            $this->addFlash('success', 'The comment has been posted !');
+            return $this->redirectToRoute('program_episode_show', [
+                'program' => $program->getId(),
+                'season' => $season->getId(),
+                'episode' => $episode->getId(),
+            ]);
+        }
+
+
+        return $this->renderForm('program/episode_show.html.twig', [
             'season' => $season,
             'program' => $program,
             'episode' => $episode,
+            'form' => $form,
+            'user' => $user,
+            'comment' => $comment,
+            'allComments' => $allCommentsEpisode,
         ]);
 
 
