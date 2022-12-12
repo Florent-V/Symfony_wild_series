@@ -16,19 +16,19 @@ class UserFixtures extends Fixture
             'email' => 'truc@mail.fr',
             'pass' => 'azerty',
             'username' => 'user1',
-            'role' => 'contributor'
+            'role' => 'ROLE_CONTRIBUTOR'
         ],
         [
             'email' => 'bidule@mail.fr',
             'pass' => 'abcdef',
             'username' => 'user2',
-            'role' => 'contributor'
+            'role' => 'ROLE_CONTRIBUTOR'
         ],
         [
             'email' => 'machin@mail.fr',
             'pass' => 'supermdp',
             'username' => 'user2',
-            'role' => 'admin',
+            'role' => 'ROLE_ADMIN',
         ]
     ];
 
