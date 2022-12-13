@@ -90,6 +90,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             $program->setYear($faker->year());
             $program->setCategory($this->getReference('category_' . CategoryFixtures::CATEGORIES[rand(0, count(CategoryFixtures::CATEGORIES) - 1)]));
             $program->setSlug($this->slugger->slug($program->getTitle()));
+            $program->setOwner($this->getReference('user_' . rand(1,3)));
             $manager->persist($program);
             $this->addReference('program_' . self::$programIndex, $program);
             
@@ -102,6 +103,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         // Tu retournes ici toutes les classes de fixtures dont ProgramFixtures dépend
         return [
             CategoryFixtures::class,
+            UserFixtures::class
         ];
     }
 }

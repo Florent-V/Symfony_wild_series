@@ -5,6 +5,7 @@
 
 {% block body %}
 
+
 	<div class="media">
 		<img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
 		<div class="media-body">
@@ -41,7 +42,9 @@
 		</div>
 	</div>
 
-	<a href="{{ path('program_edit', {'slug': program.slug}) }}">edit</a>
+	{% if is_granted("ROLE_ADMIN") or program.owner == app.user %}
+		<a href="{{ path('program_edit', { 'slug': program.slug} ) }}">Éditer</a>
+	{%endif%}
 
 	<br>
 

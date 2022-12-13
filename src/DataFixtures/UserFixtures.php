@@ -43,6 +43,7 @@ class UserFixtures extends Fixture
     {
 
         foreach (self::USER_INFOS as $userInfo) {
+            self::$userIndex++;
             $user = new User();
             $user->setEmail($userInfo['email']);
 
@@ -51,9 +52,11 @@ class UserFixtures extends Fixture
                 $userInfo['pass']
             );
             $user->setPassword($hashedPassword);
+
             $user->setRoles(array($userInfo['role']));
             $user->setUsername($userInfo['username']);
             $manager->persist($user);
+            $this->addReference('user_' . self::$userIndex, $user);
         }
 
         $manager->flush();

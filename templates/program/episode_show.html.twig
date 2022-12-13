@@ -28,6 +28,9 @@
             <div class="comment">
                 <h4>De {{ comment.author.username }}</h4>
                 <p>{{ comment.comment }} <br>Ma note : {{ comment.rate }}</p>
+                {% if is_granted("ROLE_ADMIN") or comment.author == app.user %}
+                    {{ include('comment/_delete_form.html.twig') }}
+                {%endif%}
             </div>
         {% endfor %}
     </div>
