@@ -45,6 +45,7 @@ class RegistrationController extends AbstractController
                 )
             );
 
+
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -74,6 +75,7 @@ class RegistrationController extends AbstractController
         // validate email confirmation link, sets User::isVerified=true and persists
         try {
             $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
+            $this->getUser()->setRoles(['ROLE_CONTRIBUTOR']);
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('verify_email_error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
 
