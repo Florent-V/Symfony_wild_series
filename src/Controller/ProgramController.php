@@ -8,32 +8,44 @@ use App\Entity\Episode;
 use App\Entity\Program;
 use App\Form\CommentType;
 use App\Form\ProgramType;
+use App\Form\SearchProgramType;
 use App\Repository\CommentRepository;
-use App\Repository\SeasonRepository;
 use App\Repository\ProgramRepository;
 use App\Service\ProgramDuration;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\String\Slugger\SluggerInterface;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 #[Route('/program', name: 'program_')]
 class ProgramController extends AbstractController
 {
-    #[Route('/', name: 'index', methods: ['GET'])]
-    public function index(ProgramRepository $programRepository): Response
-    {
-        $programs = $programRepository->findAll();
+    #[Route('/', name: 'index', methods: ['GET', 'POST'])]
+    public function index(
+        ProgramRepository $programRepository,
+        Request $request
+    ): Response {
 
-        return $this->render(
+        $form = $this->createForm(SearchProgramType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData()['search'];
+            $programs = $programRepository->findLikeName($search);
+            dd($programs);
+        } else {
+            $programs = $programRepository->findAll();
+        }
+
+        return $this->renderForm(
             'program/index.html.twig',
             [
                 'programs' => $programs,
+                'form' => $form
             ]
         );
     }

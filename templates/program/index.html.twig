@@ -1,33 +1,50 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	Wild Series - All Programs
+    Wild Series - All Programs
 {% endblock %}
 
 {% block body %}
 
-	<h1>Toutes les séries TV !</h1>
-	<div class="container-fluid">
-		<div class="row justify-content-center program">
-			{% for program in programs %}
-					<div class="card col-11 col-sm-5 col-lg-3 col-xxl-2 p-0 m-2">
-						<img src="{{ vich_uploader_asset(program) }}" class="card-img-top" alt="{{ program.title }}">
-						<div class="card-body">
-							<h3 class="card-title">{{ program.title }}</h3>
-							<h5>Catégorie :	{{ program.category.name }}</h5>
-							<p class="card-text">Pays : {{program.country}} - Année : {{program.year}}</p>
-							<p class="card-text">{{ program.synopsis }}</p>
-							{% set textLink = 'Voir la fiche' %}
-							{% include './program/_link_program_show.html.twig' %}
-						</div>
-					</div>
-			{% else %}
-				Aucune série trouvée.
-			{% endfor %}
-		</div>
-	</div>
+    <main class="programIndex">
+        <h1>Toutes les séries TV !</h1>
 
-	<a href="{{ path('app_index') }}">
-		Retour à l'accueil
-	</a>
+        {{ form_start(form) }}
+        {{ form_row(form.search, {
+            label: 'Recherche',
+            attr: {
+                placeholder: 'Titre de la série'
+            },
+            row_attr: {
+                class: 'form-floating mb-3'
+            }
+        }) }}
+
+        <button class="btn btn-primary">{{ button_label|default('Rechercher') }}</button>
+        {{ form_end(form) }}
+
+        <div class="container-fluid">
+            <div class="row justify-content-center program">
+                {% for program in programs %}
+                    <div class="card col-11 col-sm-5 col-lg-3 col-xxl-2 p-0 m-2">
+                        <img src="{{ vich_uploader_asset(program) }}" class="card-img-top" alt="{{ program.title }}">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ program.title }}</h3>
+                            <h5>Catégorie : {{ program.category.name }}</h5>
+                            <p class="card-text">Pays : {{ program.country }} - Année : {{ program.year }}</p>
+                            <p class="card-text">{{ program.synopsis }}</p>
+                            {% set textLink = 'Voir la fiche' %}
+                            {% include './program/_link_program_show.html.twig' %}
+                        </div>
+                    </div>
+                {% else %}
+                    Aucune série trouvée.
+                {% endfor %}
+            </div>
+        </div>
+
+        <a href="{{ path('app_index') }}">
+            Retour à l'accueil
+        </a>
+    </main>
 {% endblock %}
