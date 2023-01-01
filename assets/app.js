@@ -12,6 +12,7 @@ import './styles/app.scss';
 // start the Stimulus application
 import './bootstrap';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import './script';
 
 const $ = require('jquery');
 // this "modifies" the jquery module: adding behavior to it
