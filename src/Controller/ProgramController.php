@@ -12,7 +12,8 @@ use App\Form\SearchProgramType;
 use App\Repository\CommentRepository;
 use App\Repository\ProgramRepository;
 use App\Service\ProgramDuration;
-use Symfony\Component\Form\Extension\Core\Type\SearchType;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
@@ -135,6 +136,29 @@ class ProgramController extends AbstractController
             'program' => $program,
             'form' => $form,
         ]);
+    }
+
+    #[Route('/{id}/watchlist', name: 'watchlist', methods: ['GET'])]
+    public function addToWatchlist(
+        Program $program,
+        EntityManagerInterface $manager
+    ): Response {
+
+        if (!$program) {
+            throw $this->createNotFoundException(
+                'No program with this id found in program\'s table.'
+            );
+        }
+        /** @var \App\Entity\User $this */
+        $user = $this->getUser();
+        if ($user->isInWatchlist($program)) {
+            $user->removeFromWatchlist($program);
+        } else {
+            $user->addToWatchlist($program);
+        }
+        $manager->flush();
+
+        return $this->redirectToRoute('program_show', ['slug' => $program->getSlug()], Response::HTTP_SEE_OTHER);
     }
 
     #[Route(
