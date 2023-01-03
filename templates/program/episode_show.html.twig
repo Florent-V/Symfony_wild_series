@@ -15,7 +15,7 @@
             <a href="{{ path("program_show", { slug: program.slug }) }}" class="btn btn-primary m-t-auto">Voir la fiche</a>
         </div>	
     </div>
-{{ dump(app.user) }}
+
     {% if app.user.isVerified %}
         <div class="addComment">
             <h3>Ajouter un commentaire à l'épisode :</h3>

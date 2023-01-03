@@ -55,6 +55,7 @@ class UserFixtures extends Fixture
 
             $user->setRoles(array($userInfo['role']));
             $user->setUsername($userInfo['username']);
+            $user->setIsVerified(true);
             $manager->persist($user);
             $this->addReference('user_' . self::$userIndex, $user);
         }

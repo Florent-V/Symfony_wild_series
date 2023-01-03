@@ -6,7 +6,7 @@
 
 {% block body %}
 
-    <main class="programIndex">
+    <main class="programIndex" {{ stimulus_controller('watchlist') }}>
         <h1>Toutes les séries TV !</h1>
 
         {{ form_start(form) }}
@@ -33,9 +33,13 @@
                             <h5>Catégorie : {{ program.category.name }}</h5>
                             <p class="card-text">Pays : {{ program.country }} - Année : {{ program.year }}</p>
                             <p class="card-text">{{ program.synopsis }}</p>
-                            <a id="watchlist" href="{{ path('program_watchlist', {id: program.id})}}">
-                                <i class="bi {{ app.user.isInWatchlist(program) ? 'bi-heart-fill' : 'bi-heart' }}"></i>
-                            </a>
+                            {% if app.user %}
+                                <a class="watchlist" href="{{ path('program_watchlist', {id: program.id}) }}">
+                                    <i class="bi {{ app.user.isInWatchlist(program) ? 'bi-heart-fill' : 'bi-heart' }}"></i>
+                                </a>
+                            {% endif %}
+
+
                             {% set textLink = 'Voir la fiche' %}
                             {% include './program/_link_program_show.html.twig' %}
                         </div>

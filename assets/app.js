@@ -12,7 +12,6 @@ import './styles/app.scss';
 // start the Stimulus application
 import './bootstrap';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import './script';
 
 const $ = require('jquery');
 // this "modifies" the jquery module: adding behavior to it
@@ -22,7 +21,7 @@ require('bootstrap');
 // or you can include specific pieces
 // require('bootstrap/js/dist/tooltip');
 // require('bootstrap/js/dist/popover');
-
-$(document).ready(function() {
-    $('[data-toggle="popover"]').popover();
-});
+//
+// $(document).ready(function() {
+//     $('[data-toggle="popover"]').popover();
+// });
