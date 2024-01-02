@@ -149,7 +149,7 @@ class ProgramController extends AbstractController
                 'No program with this id found in program\'s table.'
             );
         }
-        /** @var \App\Entity\User $this */
+        /** @var \App\Entity\User */
         $user = $this->getUser();
         if ($user->isInWatchlist($program)) {
             $user->removeFromWatchlist($program);
