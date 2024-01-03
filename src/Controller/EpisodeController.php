@@ -54,7 +54,7 @@ class EpisodeController extends AbstractController
             return $this->redirectToRoute('episode_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('episode/new.html.twig', [
+        return $this->render('episode/new.html.twig', [
             'episode' => $episode,
             'form' => $form,
         ]);
@@ -81,7 +81,7 @@ class EpisodeController extends AbstractController
             return $this->redirectToRoute('episode_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('episode/edit.html.twig', [
+        return $this->render('episode/edit.html.twig', [
             'episode' => $episode,
             'form' => $form,
         ]);

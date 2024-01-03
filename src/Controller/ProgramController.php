@@ -42,7 +42,7 @@ class ProgramController extends AbstractController
             $programs = $programRepository->findAll();
         }
 
-        return $this->renderForm(
+        return $this->render(
             'program/index.html.twig',
             [
                 'programs' => $programs,
@@ -94,7 +94,7 @@ class ProgramController extends AbstractController
 
 
         // Render the form (best practice)
-        return $this->renderForm('program/new.html.twig', [
+        return $this->render('program/new.html.twig', [
             'program' => $program,
             'form' => $form
         ]);
@@ -132,7 +132,7 @@ class ProgramController extends AbstractController
             return $this->redirectToRoute('program_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('program/edit.html.twig', [
+        return $this->render('program/edit.html.twig', [
             'program' => $program,
             'form' => $form,
         ]);
@@ -221,7 +221,7 @@ class ProgramController extends AbstractController
         }
 
 
-        return $this->renderForm('program/episode_show.html.twig', [
+        return $this->render('program/episode_show.html.twig', [
             'season' => $season,
             'program' => $program,
             'episode' => $episode,
