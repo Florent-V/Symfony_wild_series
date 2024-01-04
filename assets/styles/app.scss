@@ -2,14 +2,14 @@
 // the ~ allows you to reference things in node_modules
 
 @import "./variables";
+$secondary: #034747;
 @import '../../vendor/twbs/bootstrap/scss/bootstrap';
 
 @import "./navbar";
 @import "./home.scss";
 @import "./program.scss";
 
-
-body {
+main {
     background-color: $secondary;
     color: $light;
 }

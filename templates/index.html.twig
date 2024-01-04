@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-	<main>
+	<main class="home">
 		<div class="side-panel"></div>
 		<div class="welcome col-11 col-lg-8 col-xl-6">
 			<h1>Bienvenue !</h1>
@@ -15,7 +15,9 @@
 							à votre watch-list et faite confiance à notre générateur de recommandations
 							pour vous proposez de nouvelles séries qui peuvent vous plaire !</p>
 			<div class="entry">
-				<button type="button" class="btn btn-primary">Connectez-vous</button>
+				<button type="button" class="btn btn-primary">
+					<a href="{{ path('app_login') }}">Connectez-vous</a>
+				</button>
 				<div class="separator">
 					<div class="line"></div>
 					<span>ou</span>
