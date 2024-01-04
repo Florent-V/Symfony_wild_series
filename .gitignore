@@ -6,8 +6,9 @@
 /public/bundles/
 /var/
 /node_modules/
+/Anode_modules/
 /vendor/
-/vscode/
+/vscode/github
 /idea/
 .idea/
 ###< symfony/framework-bundle ###
