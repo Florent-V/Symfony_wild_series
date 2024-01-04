@@ -56,7 +56,7 @@ class CategoryController extends AbstractController
         }
 
         // Render the form (best practice)
-        return $this->renderForm('category/new.html.twig', [
+        return $this->render('category/new.html.twig', [
             'form' => $form,
         ]);
 
