@@ -1,20 +1,11 @@
-
-// the ~ allows you to reference things in node_modules
-
+// Default variable overrides
 @import "./variables";
-$secondary: #034747;
 @import '../../vendor/twbs/bootstrap/scss/bootstrap';
 
+
+@import "./global";
+@import "./home";
+@import "./loginForm";
 @import "./navbar";
-@import "./home.scss";
 @import "./program.scss";
-
-main {
-    background-color: $secondary;
-    color: $light;
-}
-
-nav {
-    min-height: 8vh;
-    color: yellow;
-}
+@import "./register.scss";

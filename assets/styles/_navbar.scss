@@ -1,3 +1,16 @@
 i.fa-solid {
     margin-right: 0.5rem;
 }
+
+button.log {
+    margin-left: 0.5rem;
+    a {
+        text-decoration: none;
+        color: $primary
+    }
+    &:hover {
+        a {
+            color: $light
+        }
+    }
+}

@@ -9,6 +9,7 @@ use App\Entity\Program;
 use App\Form\CommentType;
 use App\Form\ProgramType;
 use App\Form\SearchProgramType;
+use App\Repository\ActorRepository;
 use App\Repository\CommentRepository;
 use App\Repository\ProgramRepository;
 use App\Service\ProgramDuration;
@@ -58,7 +59,6 @@ class ProgramController extends AbstractController
                         SluggerInterface  $slugger): Response
     {
         $program = new Program();
-
         // Create the form, linked with $category
         $form = $this->createForm(ProgramType::class, $program);
 
@@ -70,6 +70,8 @@ class ProgramController extends AbstractController
             // Deal with the submitted data
             // For example : persiste & flush the entity
             // And redirect to a route that display the result
+            $selectedActors = $request->get('selected_actors');
+            dd($selectedActors);
             $slug = $slugger->slug($program->getTitle());
             $program->setSlug($slug);
             $program->setOwner($this->getUser());

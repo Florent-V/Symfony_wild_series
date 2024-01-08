@@ -28,9 +28,6 @@ return [
         'version' => '5.3.2',
         'type' => 'css',
     ],
-    'bootstrap/dist/js/bootstrap.min.js' => [
-        'version' => '5.3.2',
-    ],
     '@hotwired/stimulus' => [
         'version' => '3.2.2',
     ],

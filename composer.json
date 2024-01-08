@@ -44,7 +44,7 @@
         "symfony/web-link": "7.0.*",
         "symfony/yaml": "7.0.*",
         "symfonycasts/reset-password-bundle": "^1.16",
-        "symfonycasts/sass-bundle": "^0.4.0",
+        "symfonycasts/sass-bundle": "^0.5.0",
         "symfonycasts/verify-email-bundle": "^1.12",
         "twbs/bootstrap": "^5.3",
         "twig/extra-bundle": "^2.12|^3.0",

@@ -3,9 +3,112 @@
 {% block title %}Nouvelle série !{% endblock %}
 
 {% block body %}
-    <h1>Ajouter une nouvelle série !</h1>
 
-    {{ include('program/_form.html.twig') }}
 
-    <a href="{{ path('program_index') }}">Retour à la liste des séries</a>
+    <main class="container-md newProgram">
+        <h1>Ajouter une nouvelle série !</h1>
+
+        {{ include('program/_form.html.twig') }}
+
+        <div class="d-flex justify-content-center mt-3">
+            <a class="btn btn-primary" href="{{ path('program_index') }}">Retour à la liste des séries</a>
+        </div>
+
+    </main>
+
+    <script>
+        function updateActorDropdown(data) {
+            const actorInput = document.querySelector('.actor-input');
+            const label = actorInput.nextSibling
+            // Supprimez toutes les options existantes
+            while (label.nextSibling) {
+                label.nextSibling.remove();
+            }
+
+            // Créez une liste déroulante avec les résultats
+            const dropdown = document.createElement('ul');
+            dropdown.className = 'actor-dropdown';
+
+            data.forEach(function(result) {
+                const option = document.createElement('li');
+                option.textContent = result.name;
+                option.setAttribute('data-actor-id', result.id);
+
+                option.addEventListener('click', function() {
+                    // Ajoutez l'acteur sélectionné à une liste ou faites ce que vous devez faire
+                    addActorButton(result);
+                    addHiddenInput(result);
+                    console.log('Actor selected:', result);
+                });
+
+                dropdown.appendChild(option);
+            });
+
+            // Ajoutez la liste déroulante sous l'input
+            label.parentNode.insertBefore(dropdown, label.nextSibling);
+        }
+
+        function createActorButton(actor) {
+            const button = document.createElement('button');
+            button.textContent = actor.name;
+            button.setAttribute('data-actor-id', actor.id);
+
+            // button.addEventListener('click', function() {
+            //     // Ajoutez le code pour gérer la suppression de l'acteur si nécessaire
+            //     console.log('Actor removed:', actor);
+            //     button.remove();
+            // });
+
+            return button;
+        }
+
+        function addActorButton(actor) {
+            const button = createActorButton(actor);
+            const actorList = document.querySelector('.selected-actors-list');
+            actorList.appendChild(button);
+            // Ajoutez un gestionnaire pour supprimer l'input hidden associé
+            button.addEventListener('click', function() {
+                const actorId = button.getAttribute('data-actor-id');
+                const hiddenInput = document.querySelector('input[name="selected_actors[]"][value="' + actorId + '"]');
+                console.log(hiddenInput);
+                if (hiddenInput) {
+                    hiddenInput.remove();
+                    console.log('Input removed:', actor);
+                }
+                button.remove();
+                console.log('Actor removed:', actor);
+            });
+        }
+
+        // Supposons que vous avez une fonction pour ajouter un champ caché au formulaire
+        function addHiddenInput(actor) {
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'selected_actors[]';
+            hiddenInput.value = actor.id;
+            document.querySelector('main > form').appendChild(hiddenInput);
+        }
+
+
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const actorInput = document.querySelector('.actor-input');
+
+            actorInput.addEventListener('input', function() {
+                const searchTerm = actorInput.value;
+
+                // Effectuez la recherche d'acteurs et affichez les résultats
+                fetch('/search/actor?term=' + searchTerm)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        updateActorDropdown(data);
+                        // Mise à jour de l'affichage des résultats
+                        // (Par exemple, créer une liste déroulante ou une liste sous l'input)
+                    });
+            });
+        });
+    </script>
+
 {% endblock %}
