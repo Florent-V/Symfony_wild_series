@@ -24,17 +24,33 @@
             if (document.querySelector('.actor-dropdown')) {
                 document.querySelector('.actor-dropdown').remove();
             }
+
+            //si data est vide return
+            if (data.length === 0) {
+                return;
+            }
             // while (label.nextSibling) {
             //     label.nextSibling.remove();
             // }
             // Création d'une liste déroulante avec les résultats
-            const dropdown = document.createElement('ul');
-            dropdown.className = 'actor-dropdown';
+            const dropdown = document.createElement('select');
+            dropdown.className = "form-select actor-dropdown";
+            dropdown.multiple = true;
+            dropdown.ariaLabel = "multiple select example";
+            dropdown.style.minHeight = "100px";
+            dropdown.style.paddingTop = "0.5rem";
+            dropdown.style.marginTop = "0.5rem";
+
+            const defaultOption = document.createElement('option');
+            defaultOption.textContent = "--Please choose an option--";
+            defaultOption.disable = true;
+            dropdown.appendChild(defaultOption);
 
             data.forEach(function(result) {
-                const option = document.createElement('li');
+                const option = document.createElement('option');
                 option.textContent = result.name;
                 option.setAttribute('data-actor-id', result.id);
+                option.setAttribute('value', result.id);
 
                 option.addEventListener('click', function() {
                     console.log('Actor selected:', result);
