@@ -1,0 +1,19 @@
+.loginForm {
+  @include my-form;
+  margin-top: 2rem;
+  h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  form, .newUser {
+    max-width: 500px;
+    margin: auto auto 2rem;
+  }
+  button {
+    display: block;
+    margin: auto;
+  }
+  p {
+    margin-bottom: 0;
+  }
+}

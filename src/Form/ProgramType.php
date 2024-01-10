@@ -30,12 +30,19 @@ class ProgramType extends AbstractType
             ->add('country', TextType::class)
             ->add('year', NumberType::class)
             ->add('category', null, ['choice_label' => 'name'])
-            ->add('actors', EntityType::class, [
-                'class' => Actor::class,
-                'choice_label' => 'firstname',
-                'multiple' => true,
-                'expanded' => true,
-                'by_reference' => false,
+//            ->add('actors', EntityType::class, [
+//                'class' => Actor::class,
+//                'choice_label' => 'firstname',
+//                'multiple' => true,
+//                'expanded' => true,
+//                'by_reference' => false
+//            ])
+            ->add('actors_input', TextType::class, [
+                'required' => false, // Le champ n'est pas obligatoire
+                'mapped' => false,   // Ne pas mapper le champ vers l'entité
+                'attr' => [
+                    'class' => 'actor-input',
+                ],
             ])
         ;
     }

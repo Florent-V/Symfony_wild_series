@@ -6,11 +6,11 @@ use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\ProgramRepository;
 use App\Repository\CategoryRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/category', name: 'category_')]
 class CategoryController extends AbstractController
@@ -56,7 +56,7 @@ class CategoryController extends AbstractController
         }
 
         // Render the form (best practice)
-        return $this->renderForm('category/new.html.twig', [
+        return $this->render('category/new.html.twig', [
             'form' => $form,
         ]);
 
