@@ -39,6 +39,24 @@ class ActorRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Recherche les acteurs en fonction de la saisie utilisateur dans les colonnes firstname et lastname.
+     *
+     * @param string $term La saisie utilisateur
+     * @return array La liste des acteurs correspondants
+     */
+    public function searchActors(string $term): array
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        // Utilisation de LIKE pour rechercher dans les colonnes firstname et lastname
+        $qb->andWhere($qb->expr()->like('a.firstname', ':term'))
+            ->orWhere($qb->expr()->like('a.lastname', ':term'))
+            ->setParameter('term', '%' . $term . '%');
+
+        return $qb->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Actor[] Returns an array of Actor objects
 //     */

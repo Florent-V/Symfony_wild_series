@@ -1,6 +1,90 @@
 {{ form_start(form) }}
 
-    {{ form_widget(form) }}
-<button class="btn" type="submit">{{ button_label|default('Ajouter la série !') }}</button>
+
+        {{ form_row(form.title, {
+            label: 'Titre de la série',
+            attr: {
+                placeholder: 'Titre de la série'
+            },
+            row_attr: {
+                class: 'form-floating mb-3'
+            }
+        }) }}
+
+        {{ form_row(form.synopsis, {
+            label: 'Synopsis de la série',
+            attr: {
+                placeholder: 'Synopsis de la série'
+            },
+            row_attr: {
+                class: 'form-floating mb-3'
+            }
+        }) }}
+
+        {{ form_row(form.posterFile, {
+            label: 'Affiche de la série',
+            attr: {
+                placeholder: 'Affiche de la série'
+            }
+        }) }}
+
+        {{ form_row(form.country, {
+            label: 'Pays de la série',
+            attr: {
+                placeholder: 'Pays de la série'
+            },
+            row_attr: {
+                class: 'form-floating mb-3'
+            }
+        }) }}
+
+        {{ form_row(form.year, {
+            label: 'Année de la série',
+            attr: {
+                placeholder: 'Année de la série'
+            },
+            row_attr: {
+                class: 'form-floating mb-3'
+            }
+        }) }}
+
+        {{ form_row(form.category, {
+            label: 'Catégorie de la série',
+            attr: {
+                placeholder: 'Catégorie de la série'
+            },
+            row_attr: {
+                class: 'form-floating mb-3'
+            }
+        }) }}
+
+        <div class="selected-actors-list">
+            <!-- La liste des acteurs sélectionnés sera ajoutée ici -->
+
+
+        </div>
+
+        {{ form_row(form.actors_input, {
+            label: 'Acteurs de la série',
+            attr: {
+                placeholder: 'Acteurs de la série'
+            },
+            row_attr: {
+                class: 'form-floating mb-3'
+            }
+        }) }}
+
+<label class="text-light" for="pet-select">Choose a pet:</label>
+
+        <select class="form-select" multiple aria-label="multiple select example">
+            <option value="dog">Dog</option>
+            <option value="cat">Cat</option>
+            <option value="hamster">Hamster</option>
+            <option value="parrot">Parrot</option>
+            <option value="spider">Spider</option>
+            <option value="goldfish">Goldfish</option>
+        </select>
+
+<button class="btn btn-primary d-flex m-auto" type="submit">{{ button_label|default('Ajouter la série !') }}</button>
 
 {{ form_end(form) }}

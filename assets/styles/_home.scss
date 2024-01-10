@@ -1,13 +1,14 @@
-.main-panel {
-    height: 92vh;
-    max-height: 92vh;
-    display: grid;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(4, calc(25% - 0.5rem));
-    grid-column-gap: 0.5rem;
-    grid-row-gap: 0.5rem;
-    padding: 0.5rem;
+.home {
+    .main-panel {
+        height: 92vh;
+        max-height: 92vh;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: repeat(4, calc(25% - 0.5rem));
+        grid-column-gap: 0.5rem;
+        grid-row-gap: 0.5rem;
+        padding: 0.5rem;
+    }
 }
 
 .tumbnail {
@@ -19,82 +20,82 @@
 
 .tumbnail1 {
     grid-area: 1 / 1 / 3 / 3;
-    background-image: url("/public/uploads/homepage/friends.jpg");
+    background-image: url("../images/homepage/friends.jpg");
 }
 
 .tumbnail2 {
     grid-area: 3 / 6 / 5 / 8;
-    background-image: url("/public/uploads/homepage/squidgame.png");
+    background-image: url("../images/homepage/squidgame.png");
 }
 
 .tumbnail3 {
     grid-area: 3 / 1 / 5 / 2;
-    background-image: url("/public/uploads/homepage/Vkaamelott.jpg");
+    background-image: url("../images/homepage/Vkaamelott.jpg");
 }
 
 .tumbnail4 {
     grid-area: 3 / 2 / 4 / 3;
-    background-image: url("/public/uploads/homepage/4chernobyl.jpg");
+    background-image: url("../images/homepage/4chernobyl.jpg");
 }
 
 .tumbnail5 {
     grid-area: 4 / 2 / 5 / 3;
-    background-image: url("/public/uploads/homepage/gotham.jpg");
+    background-image: url("../images/homepage/gotham.jpg");
 }
 
 .tumbnail6 {
     grid-area: 1 / 7 / 3 / 8;
-    background-image: url("/public/uploads/homepage/Vniptuck.jpg");
+    background-image: url("../images/homepage/Vniptuck.jpg");
 }
 
 .tumbnail7 {
     grid-area: 1 / 6 / 2 / 7;
-    background-image: url("/public/uploads/homepage/Hthebigbang.jpg");
+    background-image: url("../images/homepage/Hthebigbang.jpg");
 }
 
 .tumbnail8 {
     grid-area: 2 / 6 / 3 / 7;
-    background-image: url("/public/uploads/homepage/Hwalker-texas-ranger.jpeg");
+    background-image: url("../images/homepage/Hwalker-texas-ranger.jpeg");
 }
 
 .tumbnail9 {
     grid-area: 1 / 3 / 2 / 5;
-    background-image: url("/public/uploads/homepage/Htruedetective.jpg");
+    background-image: url("../images/homepage/Htruedetective.jpg");
 }
 
 .tumbnail10 {
     grid-area: 4 / 4 / 5 / 6;
-    background-image: url("/public/uploads/homepage/Htheboys.jpg");
+    background-image: url("../images/homepage/Htheboys.jpg");
 }
 
 .tumbnail11 {
     grid-area: 3 / 3 / 5 / 4;
-    background-image: url("/public/uploads/homepage/Vpeakyblinder.jpg");
+    background-image: url("../images/homepage/Vpeakyblinder.jpg");
 }
 
 .tumbnail12 {
     grid-area: 1 / 5 / 3 / 6;
-    background-image: url("/public/uploads/homepage/VThe100.png");
+    background-image: url("../images/homepage/VThe100.png");
 }
 
 .tumbnail13 {
     grid-area: 2 / 3 / 3 / 4;
-    background-image: url("/public/uploads/homepage/Hwalkingdead.jpg");
+    background-image: url("../images/homepage/Hwalkingdead.jpg");
 }
 
 .tumbnail14 {
     grid-area: 2 / 4 / 3 / 5;
-    background-image: url("/public/uploads/homepage/sherlock.jpg");
+    background-image: url("../images/homepage/sherlock.jpg");
 }
 
 .tumbnail15 {
     grid-area: 3 / 4 / 4 / 5;
-    background-image: url("/public/uploads/homepage/miraculous.png");
+    background-image: url("../images/homepage/miraculous.png");
 }
 
 .tumbnail16 {
     grid-area: 3 / 5 / 4 / 6;
-    background-image: url("/public/uploads/homepage/charmed.jpg");
+    background-image: url("../images/homepage/charmed.jpg");
 }
 
 .welcome {
@@ -106,6 +107,7 @@
     display: grid;
     grid-template-columns: 2fr 1fr;
     padding: 1rem;
+    color: white;
 }
 
 .welcome h1, .welcome h2 {

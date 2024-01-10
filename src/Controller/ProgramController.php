@@ -9,6 +9,7 @@ use App\Entity\Program;
 use App\Form\CommentType;
 use App\Form\ProgramType;
 use App\Form\SearchProgramType;
+use App\Repository\ActorRepository;
 use App\Repository\CommentRepository;
 use App\Repository\ProgramRepository;
 use App\Service\ProgramDuration;
@@ -42,7 +43,7 @@ class ProgramController extends AbstractController
             $programs = $programRepository->findAll();
         }
 
-        return $this->renderForm(
+        return $this->render(
             'program/index.html.twig',
             [
                 'programs' => $programs,
@@ -55,10 +56,10 @@ class ProgramController extends AbstractController
     public function new(Request           $request,
                         MailerInterface   $mailer,
                         ProgramRepository $programRepository,
+                        ActorRepository  $actorRepository,
                         SluggerInterface  $slugger): Response
     {
         $program = new Program();
-
         // Create the form, linked with $category
         $form = $this->createForm(ProgramType::class, $program);
 
@@ -70,6 +71,14 @@ class ProgramController extends AbstractController
             // Deal with the submitted data
             // For example : persiste & flush the entity
             // And redirect to a route that display the result
+            $selectedActorsIds = $request->get('selected_actors');
+            $selectedActors = $actorRepository->findBy(['id' => $selectedActorsIds]);
+
+
+            foreach ($selectedActors as $actor) {
+                $program->addActor($actor);
+            }
+
             $slug = $slugger->slug($program->getTitle());
             $program->setSlug($slug);
             $program->setOwner($this->getUser());
@@ -94,7 +103,7 @@ class ProgramController extends AbstractController
 
 
         // Render the form (best practice)
-        return $this->renderForm('program/new.html.twig', [
+        return $this->render('program/new.html.twig', [
             'program' => $program,
             'form' => $form
         ]);
@@ -132,7 +141,7 @@ class ProgramController extends AbstractController
             return $this->redirectToRoute('program_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('program/edit.html.twig', [
+        return $this->render('program/edit.html.twig', [
             'program' => $program,
             'form' => $form,
         ]);
@@ -149,7 +158,7 @@ class ProgramController extends AbstractController
                 'No program with this id found in program\'s table.'
             );
         }
-        /** @var \App\Entity\User $this */
+        /** @var \App\Entity\User */
         $user = $this->getUser();
         if ($user->isInWatchlist($program)) {
             $user->removeFromWatchlist($program);
@@ -221,7 +230,7 @@ class ProgramController extends AbstractController
         }
 
 
-        return $this->renderForm('program/episode_show.html.twig', [
+        return $this->render('program/episode_show.html.twig', [
             'season' => $season,
             'program' => $program,
             'episode' => $episode,
