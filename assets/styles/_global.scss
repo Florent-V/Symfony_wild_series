@@ -6,14 +6,6 @@ body{
   color: $light!important;
 }
 
-form {
-   color: black;
-}
-
-@mixin my-form {
-  max-width: 900px;
-}
-
 nav {
   min-height: 8vh;
   color: yellow;
