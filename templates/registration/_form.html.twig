@@ -1,6 +1,6 @@
-{{ form_start(registrationForm) }}
+{{ form_start(form) }}
 
-        {{ form_row(registrationForm.email, {
+        {{ form_row(form.email, {
                 label: 'Email',
                 attr: {
                         placeholder: 'john@doe.fr'
@@ -10,7 +10,7 @@
                 }
         }) }}
 
-        {{ form_row(registrationForm.username, {
+        {{ form_row(form.username, {
                 label: 'Pseudo',
                 attr: {
                         placeholder: 'john59'
@@ -20,7 +20,7 @@
                 }
         }) }}
 
-        {{ form_row(registrationForm.bio, {
+        {{ form_row(form.bio, {
                 label: 'Bio',
                 attr: {
                         placeholder: 'Je suis... J\'aime...'
@@ -30,7 +30,7 @@
                 }
         }) }}
 
-        {{ form_row(registrationForm.plainPassword, {
+        {{ form_row(form.plainPassword, {
                 label: 'Password',
                 attr: {
                         placeholder: '********'
@@ -40,11 +40,11 @@
                 }
         }) }}
 
-        {{ form_row(registrationForm.agreeTerms) }}
+        {{ form_row(form.agreeTerms) }}
 
 <div class="d-flex justify-content-center">
         <button type="submit" class="btn btn-primary">{{ button_label|default('S\'enregistrer') }}</button>
 </div>
 
 
-{{ form_end(registrationForm) }}
+{{ form_end(form) }}

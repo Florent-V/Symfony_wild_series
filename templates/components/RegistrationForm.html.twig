@@ -1,0 +1,57 @@
+<div
+    {{ attributes }}
+>
+    {{ form_start(form) }}
+
+    {{ form_row(form.email, {
+        label: 'Email',
+        attr: {
+            placeholder: 'john@doe.fr'
+        },
+        row_attr: {
+            class: 'form-floating mb-3'
+        }
+    }) }}
+
+    {{ form_row(form.username, {
+        label: 'Pseudo',
+        attr: {
+            placeholder: 'john59'
+        },
+        row_attr: {
+            class: 'form-floating mb-3'
+        }
+    }) }}
+
+    {{ form_row(form.bio, {
+        label: 'Bio',
+        attr: {
+            placeholder: 'Je suis... J\'aime...'
+        },
+        row_attr: {
+            class: 'form-floating mb-3'
+        }
+    }) }}
+
+    {{ form_row(form.plainPassword, {
+        label: 'Password',
+        attr: {
+            placeholder: '********'
+        },
+        row_attr: {
+            class: 'form-floating mb-3'
+        }
+    }) }}
+
+    {{ form_row(form.agreeTerms) }}
+
+    <div class="d-flex justify-content-center">
+        <button
+                type="submit"
+                class="btn btn-primary {{ this.hasValidationErrors ? 'disabled' : '' }}"
+        >{{ button_label|default('S\'enregistrer') }}</button>
+    </div>
+
+
+    {{ form_end(form) }}
+</div>

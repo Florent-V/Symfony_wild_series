@@ -4,14 +4,19 @@
 
 {% block body %}
 
-    <main class="container-md register-form pt-4">
+    <main class="container-md globalForm register-form">
         {% for flash_error in app.flashes('verify_email_error') %}
             <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
         {% endfor %}
 
         <h1>Inscrivez-vous :</h1>
 
-        {{  include('registration/_form.html.twig') }}
+{#        {{  include('registration/_form.html.twig') }}#}
+{#        <twig:RegistrationForm />#}
+        {{ component('RegistrationForm', {
+            form: form,
+        }) }}
+
     </main>
 
 {% endblock %}
